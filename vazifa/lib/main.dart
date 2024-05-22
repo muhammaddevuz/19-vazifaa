@@ -1,18 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-List product = [
-  {"title": "Macbook", "price": "100 000"},
-  {"title": "iPhone 14", "price": "120 000"},
-  {"title": "Samsung Galaxy S21", "price": "90 000"},
-  {"title": "Dell XPS 13", "price": "110 000"},
-  {"title": "Sony WH-1000", "price": "30 000"},
-  {"title": "Apple Watch Series 7", "price": "50 000"},
-  {"title": "iPad Pro 11-inch", "price": "80 000"},
-  {"title": "Google Pixel 6", "price": "70 000"},
-  {"title": "Microsoft Surface Pro 7", "price": "100 000"},
-  {"title": "Bose QuietComfort 35 II", "price": "35 000"},
-  {"title": "Amazon Echo Show 8", "price": "20 000"}
+class ProductModel {
+  final String title;
+  final double price;
+
+  ProductModel({
+    required this.title,
+    required this.price,
+  });
+}
+
+List<ProductModel> products = [
+  ProductModel(title: "Macbook", price: 600.0),
+  ProductModel(title: "iPhone 14", price: 700.0),
+  ProductModel(title: "Samsung Galaxy S21", price: 1200.0),
+  ProductModel(title: "Dell XPS 13", price: 300.0),
+  ProductModel(title: "Sony WH-1000", price: 500.0),
+  ProductModel(title: "Apple Watch Series 7", price: 400.0),
+  ProductModel(title: "iPad Pro 11-inch", price: 1500.0),
+  ProductModel(title: "Google Pixel 6", price: 250.0),
+  ProductModel(title: "Bose QuietComfort 35 II", price: 645.0),
+  ProductModel(title: "Amazon Echo Show 8", price: 980.0),
 ];
 
 void main() {
@@ -61,7 +70,7 @@ class _MyAppState extends State<MyApp> {
             IconButton(
                 onPressed: () {
                   setState(() {
-                    product = product.reversed.toList();
+                    products = products.reversed.toList();
                   });
                 },
                 icon: const Icon(
@@ -186,8 +195,8 @@ Widget galarey(String searchItem) {
     padding: const EdgeInsets.all(20),
     child: Column(
       children: [
-        for (var i = 0; i < product.length; i++)
-          product[i]['title'].contains(searchItem)
+        for (var i = 0; i < products.length; i++)
+          products[i].title.toLowerCase().contains(searchItem.toLowerCase())
               ? Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Container(
@@ -235,7 +244,7 @@ Widget galarey(String searchItem) {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      product[i]['title'],
+                                      products[i].title,
                                       style: const TextStyle(
                                           fontSize: 22,
                                           fontWeight: FontWeight.w500),
@@ -263,7 +272,7 @@ Widget galarey(String searchItem) {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                "${product[i]['price']} so'm",
+                                "${products[i].price} \$",
                                 style: const TextStyle(
                                     fontSize: 30, fontWeight: FontWeight.bold),
                               ),
@@ -291,8 +300,8 @@ Widget list(String searchItem) {
   return ListView(
     padding: const EdgeInsets.all(20),
     children: [
-      for (var i = 0; i < product.length; i++)
-        product[i]['title'].contains(searchItem)
+      for (var i = 0; i < products.length; i++)
+        products[i].title.toLowerCase().contains(searchItem.toLowerCase())
             ? Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 10),
                 child: Container(
@@ -351,7 +360,7 @@ Widget list(String searchItem) {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          product[i]['title'],
+                                          products[i].title,
                                           softWrap: true,
                                           style: const TextStyle(
                                               fontSize: 22,
@@ -382,7 +391,7 @@ Widget list(String searchItem) {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                "${product[i]['price']} so'm",
+                                "${products[i].price} \$",
                                 style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
@@ -419,9 +428,9 @@ Widget list(String searchItem) {
 }
 
 Widget plitka(String searchItem) {
-  List box = [];
-  for (var element in product) {
-    if (element['title'].contains(searchItem)) {
+  List<ProductModel> box = [];
+  for (var element in products) {
+    if (element.title.toLowerCase().contains(searchItem.toLowerCase())) {
       box.add(element);
     }
   }
@@ -480,7 +489,7 @@ Widget plitka(String searchItem) {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    box[i]['title'],
+                                    box[i].title,
                                     style: const TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.w500),
@@ -509,7 +518,7 @@ Widget plitka(String searchItem) {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          "${box[i]['price']} so'm",
+                          "${box[i].price} \$",
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
